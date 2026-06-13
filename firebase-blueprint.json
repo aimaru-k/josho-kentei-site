@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "User's display name" },
+        "email": { "type": "string", "description": "User's email address" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "PracticeHistory": {
+      "title": "Practice History",
+      "description": "Record of a user's practice session",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user" },
+        "topicId": { "type": "string", "description": "ID of the topic (e.g., 'it-passport')" },
+        "problemId": { "type": "string", "description": "ID of the specific problem" },
+        "score": { "type": "number", "description": "Score achieved" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the practice was completed" }
+      },
+      "required": ["userId", "topicId", "score", "timestamp"]
+    },
+    "SiteStats": {
+      "title": "Site Stats",
+      "description": "Global statistics for the site",
+      "type": "object",
+      "properties": {
+        "visitCount": { "type": "integer", "description": "Total number of site visits" },
+        "lastVisit": { "type": "string", "format": "date-time", "description": "Timestamp of the last visit" }
+      },
+      "required": ["visitCount"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/history/{historyId}": {
+      "schema": "PracticeHistory",
+      "description": "User practice history"
+    },
+    "/stats/global": {
+      "schema": "SiteStats",
+      "description": "Global site statistics"
+    }
+  }
+}
